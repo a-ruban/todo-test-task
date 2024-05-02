@@ -5,6 +5,7 @@ services:
     command: npm run dev
     volumes:
       - ./TODOAppFrontend:/app
+      - exclude:/app/node_modules/
     ports:
       - "8080:8080"
     networks:
@@ -27,3 +28,6 @@ services:
 networks:
   backend:
     driver: bridge
+
+volumes:
+  exclude:
