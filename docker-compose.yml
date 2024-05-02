@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend:
+    build: ./TODOAppFrontend
+    command: npm run dev
+    volumes:
+      - ./TODOAppFrontend:/app
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    environment:
+      - VITE_APP_BASE_URL=http://localhost:8000/api/v1/
+    restart: on-failure
+
+  backend:
+    build: ./TODOAppTestTask
+    volumes:
+      - ./TODOAppTestTask:/app
+    command: ./start-dev-backend.sh
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+    restart: on-failure
+
+networks:
+  backend:
+    driver: bridge
